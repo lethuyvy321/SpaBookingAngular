@@ -4,6 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ServiceComponent } from './service/service.component';
 import { PriceComponent } from './price/price.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -11,8 +14,10 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },  
   { path: 'service', component: ServiceComponent },
   { path: 'price', component: PriceComponent },
-  // { path: 'contact', component: ContactComponent },
+  { path: 'appointment', component: AppointmentComponent },
+  { path: 'contact', component: ContactComponent },
   // { path: 'login', component: LoginComponent }
+  { path: '**', component: PagenotfoundComponent },
 ];
 
 @NgModule({
