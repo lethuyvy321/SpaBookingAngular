@@ -6,5 +6,5 @@ export interface Service{
     Price: number,
     created : Date,
     updated : Date,
-    isDeleted : boolean,
+    Deleted : boolean,
 }

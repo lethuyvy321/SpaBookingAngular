@@ -58,7 +58,7 @@ export class ServiceComponent {
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        service.isDeleted = true;
+        service.Deleted = true;
         this.dataService.putService(service).subscribe({
           next: data => {
             console.log('Xóa thành công', data);

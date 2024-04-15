@@ -24,15 +24,15 @@ export class DataService {
   };
   public newclient: Client = {
     id: '',
-    name: '',
-    username: '',
-    password: '',
-    sdt: '',
-    email: '',
-    birthday: new Date(),
+    FullName: '',
+    UserName: '',
+    Password: '',
+    SDT: '',
+    Email: '',
+    Birthday: new Date(),
     created: new Date(),
     updated: new Date(),
-    isDeleted: false,
+    Deleted: false,
   };
 
   public newrole: Role = {
@@ -74,7 +74,7 @@ export class DataService {
     Price: 0,
     created: new Date(),
     updated: new Date(),
-    isDeleted: false,
+    Deleted: false,
   }
 
   public newbooking: Booking = {
@@ -120,20 +120,16 @@ export class DataService {
   public newClient(): Client {
     return this.newclient;
   }
-  public getAllClient(): Observable<Client[]> {
-    const url = `${this.REST_API_SERVER}/client`;
+  public getAllClient(): Observable<any> {
+    const url = `${this.REST_API_SERVER}/clients`;
     return this.httpClient.get<Client[]>(url);
   }
-  public postClient(payload: Client): Observable<Client> {
-    const url = `${this.REST_API_SERVER}/client`;
-    return this.httpClient.post<Client>(url, payload, this.httpOptions);
-  }
   public putClient(payload: Client): Observable<Client> {
-    const url = `${this.REST_API_SERVER}/client`;
+    const url = `${this.REST_API_SERVER}/clients/${payload.id}`;
     return this.httpClient.put<Client>(url, payload, this.httpOptions);
   }
   public getClientById(ClientID: string): Observable<Client> {
-    const url = `${this.REST_API_SERVER}/Client/ClientID?ClientID=${ClientID}`;
+    const url = `${this.REST_API_SERVER}/clients/${ClientID}`;
     return this.httpClient.get<Client>(url, this.httpOptions);
   }
 
@@ -150,7 +146,7 @@ export class DataService {
     return this.httpClient.post<Role>(url, payload, this.httpOptions);
   }
   public putRole(payload: Role): Observable<Role> {
-    const url = `${this.REST_API_SERVER}/roles//${payload.id}`;
+    const url = `${this.REST_API_SERVER}/roles/${payload.id}`;
     return this.httpClient.put<Role>(url, payload, this.httpOptions);
   }
   public getRoleById(RoleID: string): Observable<Role> {

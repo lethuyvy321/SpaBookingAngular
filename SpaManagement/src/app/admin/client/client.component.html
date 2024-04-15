@@ -1,1 +1,132 @@
-<p>client works!</p>
+<p-toast></p-toast>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="card-body">
+            <div class="card-body">
+                <p-toolbar styleClass="mb-4 gap-2">
+                    <ng-template pTemplate="right">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Tìm kiếm..." />
+                        </span>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="card-body">
+                <h6 class="text-capitalize">staff</h6>
+                <p-table #dt [value]="clients" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['FullName','UserName','Email','Address','createdAt','updatedAt']"
+                    [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="FullName">
+                                Tên <p-sortIcon field="FullName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="UserName">
+                                UserName <p-sortIcon field="UserName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Email">
+                                Email <p-sortIcon field="Email"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Birthday">
+                                Birthday <p-sortIcon field="Birthday"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="createdAt">
+                                Ngày tạo <p-sortIcon field="createdAt"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="updatedAt">
+                                Ngày chỉnh <p-sortIcon field="updatedAt"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Delete">
+                                Xóa
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-client let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr>
+                            <td>
+                                {{ client.FullName }}
+                            </td>
+                            <td>
+                                {{ client.UserName }}
+                            </td>
+                            <td>
+                                {{ client.Email }}
+                            </td>
+                            <td>
+                                {{ client.Birthday}} 
+                            </td>
+                            <td>
+                                {{ client.createdAt | date: "dd/MM/yyyy" }} <br>
+                            </td>
+                            <td>
+                                {{ client.updatedAt | date: "dd/MM/yyyy"}} <br>
+                            </td>
+                            <td>
+                                {{ client.Deleted }}
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                                    (click)="editClient(client)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="deleteClient(client)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <p-dialog [(visible)]="clientDialog" [style]="{ width: '600px' }" header="Client" [modal]="true"
+            styleClass="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="p-field">
+                    <label for="FullName">Tên</label> <br>
+                    <input type="text" name="FullName" pInputText id="FullName" [(ngModel)]="client.FullName" required autofocus />
+                    <small class="p-error" *ngIf="submitted && !client.FullName">Name is required.</small>
+                </div>
+                <div class="p-field">
+                    <label for="price">UserName</label> <br>
+                    <input type="text" pInputText name="UserName" [(ngModel)]="client.UserName" required autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !client.UserName">UserName is
+                        required.</small>
+                </div>
+                <div class="p-field">
+                    <label for="price">Email</label> <br>
+                    <input type="text" pInputText name="Email" [(ngModel)]="client.Email" required autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !client.Email">Email is
+                        required.</small>
+                </div>
+                <div class="field">
+                    <label for="description">Số điện thoại</label> <br>
+                    <input type="text" pInputText name="SDT" [(ngModel)]="client.SDT" required
+                        autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !client.SDT">SDT is
+                        required.</small>
+                </div>
+                <div class="field">
+                    <label for="description">Birthday</label> <br>
+                    <input type="date" pInputText name="Birthday" [(ngModel)]="client.Birthday" required
+                        autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !client.Birthday">Birthday is
+                        required.</small>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                    (click)="saveClient()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-confirmDialog [style]="{ width: '50' }"></p-confirmDialog>
+    </div>
+</div>
