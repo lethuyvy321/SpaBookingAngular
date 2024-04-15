@@ -1,0 +1,141 @@
+<p-toast></p-toast>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="card-body">
+            <div class="card-body">
+                <p-toolbar styleClass="mb-4 gap-2">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="Thêm dịch vụ" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="openNew()"></button>
+                    </ng-template>
+                    <ng-template pTemplate="right">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Tìm kiếm..." />
+                        </span>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="card-body">
+                <h6 class="text-capitalize">service</h6>
+                <p-table #dt [value]="services" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['Name','Description','category','Price','createdAt','updatedAt']"
+                    [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="Name">
+                                Tên <p-sortIcon field="Name"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="category">
+                                Loại dịch vụ <p-sortIcon field="category"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Description">
+                                Mô tả <p-sortIcon field="Description"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Price">
+                                Giá <p-sortIcon field="Price"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="createdAt">
+                                Ngày tạo <p-sortIcon field="createdAt"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="updatedAt">
+                                Ngày chỉnh <p-sortIcon field="updatedAt"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Delete">
+                                Xóa
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-service let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr>
+                            <td>
+                                {{ service.Name }}
+                            </td>
+                            <!-- <td>
+                                {{ service.TypeID }} <br>
+                            </td> -->
+                            <td>
+                                {{ service.Description }}
+                            </td>
+                            <td>
+                                {{ service.Price}} <br>
+                            </td>
+                            <td>
+                                {{ service.createdAt | date: "dd/MM/yyyy" }} <br>
+                            </td>
+                            <td>
+                                {{ service.updatedAt | date: "dd/MM/yyyy"}} <br>
+                            </td>
+                            <td>
+                                {{ service.Delete }}
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                                    (click)="editService(service)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="deleteService(service)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <p-dialog [(visible)]="serviceDialog" [style]="{ width: '600px' }" header="Chi tiết service" [modal]="true"
+            styleClass="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="p-field">
+                    <label>Loại service</label>
+                    <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name"
+                        [showClear]="true" placeholder="Select a Category" (onChange)="changeCategory($event.value)"
+                        dataKey="name">
+                        <ng-template pTemplate="selectedItem">
+                            <div class="flex align-items-center gap-2" *ngIf="selectedCategory">
+                                <div>{{ selectedCategory.Name }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-category pTemplate="item">
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ category?.Name }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !selectedCategory.Name">Category is
+                        required.</small>
+                </div>
+                <div class="p-field">
+                    <label for="service_name">Tên service</label> <br>
+                    <input type="text" name="Name" pInputText id="Name" [(ngModel)]="service.Name" required autofocus />
+                    <small class="p-error" *ngIf="submitted && !service.Name">Name is required.</small>
+                </div>
+                <div class="p-field">
+                    <label for="price">Giá</label> <br>
+                    <input type="text" pInputText name="Price" [(ngModel)]="service.Price" required autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !service.Price">Price is
+                        required.</small>
+                </div>
+                <div class="field">
+                    <label for="description">Mô tả</label> <br>
+                    <input type="text" pInputText name="Description" [(ngModel)]="service.Description" required
+                        autofocus />
+                    <br>
+                    <small class="p-error" *ngIf="submitted && !service.Description">Description is
+                        required.</small>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                    (click)="saveService()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-confirmDialog [style]="{ width: '50' }"></p-confirmDialog>
+    </div>
+</div>
