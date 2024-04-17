@@ -15,7 +15,7 @@
                 </p-toolbar>
             </div>
             <div class="card-body">
-                <h6 class="text-capitalize">staff</h6>
+                <h6 class="text-capitalize">Client</h6>
                 <p-table #dt [value]="clients" [rows]="10" [paginator]="true"
                     [globalFilterFields]="['FullName','UserName','Email','Address','createdAt','updatedAt']"
                     [rowHover]="true" dataKey="id">
@@ -28,7 +28,7 @@
                                 UserName <p-sortIcon field="UserName"></p-sortIcon>
                             </th>
                             <th pSortableColumn="Email">
-                                Email <p-sortIcon field="Email"></p-sortIcon>
+                                Phone <p-sortIcon field="Email"></p-sortIcon>
                             </th>
                             <th pSortableColumn="Birthday">
                                 Birthday <p-sortIcon field="Birthday"></p-sortIcon>
@@ -54,7 +54,7 @@
                                 {{ client.UserName }}
                             </td>
                             <td>
-                                {{ client.Email }}
+                                {{ client.SDT }}
                             </td>
                             <td>
                                 {{ client.Birthday}} 
@@ -66,7 +66,7 @@
                                 {{ client.updatedAt | date: "dd/MM/yyyy"}} <br>
                             </td>
                             <td>
-                                {{ client.Deleted }}
+                                {{ client.isDeleted }}
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"

@@ -132,14 +132,7 @@
           </div>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <div class="dropdown">
-                <p class="btn btn-light"><i class="pi pi-user"></i></p>
-                <div class="dropdown-content">
-                  <button class="btn btn-light btn-rounded" (click)="logout()">
-                    Logout
-                  </button>
-                </div>
-              </div>
+                  <a class="btn btn-light" routerLink="/profile"><i class="pi pi-user"></i></a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a
@@ -154,10 +147,10 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
+            <li>
+              <button class="btn btn-light" (click)="logout()">
+                Logout
+              </button>
             </li>
           </ul>
         </div>

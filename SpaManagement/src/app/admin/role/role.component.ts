@@ -45,7 +45,7 @@ export class RoleComponent {
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        category.Deleted = true;
+        category.isDeleted = true;
         this.dataService.putRole(category).subscribe({
           next: data => {
             console.log('Xóa thành công', data);

@@ -32,7 +32,7 @@ export class DataService {
     Birthday: new Date(),
     created: new Date(),
     updated: new Date(),
-    Deleted: false,
+    isDeleted: false,
   };
 
   public newrole: Role = {
@@ -40,11 +40,11 @@ export class DataService {
     Name: '',
     created: new Date(),
     updated: new Date(),
-    Deleted: false,
+    isDeleted: false,
   }
 
   public newstaff: Staff = {
-    id: '',
+    _id: '',
     FullName: '',
     UserName: '',
     Password: '',
@@ -55,7 +55,7 @@ export class DataService {
     Address: '',
     created: new Date(),
     updated: new Date(),
-    Deleted: false,
+    isDeleted: false,
   }
 
   public newtypeservice: TypeService = {
@@ -74,21 +74,21 @@ export class DataService {
     Price: 0,
     created: new Date(),
     updated: new Date(),
-    Deleted: false,
+    isDelete: false,
   }
 
   public newbooking: Booking = {
     id: '',
-    clientID: '',
-    Name: '',
+    ClientID: '',
+    FullName: '',
     Date: new Date(),
     Time: '',
   }
 
   public newdetail: BookingDetail = {
-    booking_ID: '',
-    serviceID: '',
-    price: 0,
+    BookingID: '',
+    ServiceID: '',
+    Price: 0,
   }
   private userPayload: any;
   constructor(private httpClient: HttpClient, private router: Router) {
@@ -98,11 +98,22 @@ export class DataService {
     const url = `${this.REST_API_SERVER}/authstaff/login`;
     return this.httpClient.post<Staff>(url, payload, this.httpOptions);
   }
+  public me(): Observable<any> {
+    const url = `${this.REST_API_SERVER}/authstaff/me`;
+    return this.httpClient.get<any>(url, this.httpOptions);
+  }
   public register(payload: Staff): Observable<Staff> {
     const url = `${this.REST_API_SERVER}/authstaff/register`;
     return this.httpClient.post<Staff>(url, payload, this.httpOptions);
   }
-
+  public sendmail(payload: Staff): Observable<Staff> {
+    const url = `${this.REST_API_SERVER}/authstaff/forgotPassword`;
+    return this.httpClient.post<Staff>(url, payload, this.httpOptions);
+  } 
+  public resetPassword(payload: Staff,token :string): Observable<Staff> {
+    const url = `${this.REST_API_SERVER}/authstaff/ResetPassword/${token}`;
+    return this.httpClient.post<Staff>(url, payload, this.httpOptions);
+  }
   public logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
@@ -167,10 +178,10 @@ export class DataService {
     return this.httpClient.post<Staff>(url, payload, this.httpOptions);
   }
   public putStaff(payload: Staff): Observable<Staff> {
-    const url = `${this.REST_API_SERVER}/staffs/${payload.id}`;
+    const url = `${this.REST_API_SERVER}/staffs/${payload._id}`;
     return this.httpClient.put<Staff>(url, payload, this.httpOptions);
   }
-  public getStaffById(StaffID: string): Observable<Staff> {
+  public getStaffById(StaffID: string): Observable<any> {
     const url = `${this.REST_API_SERVER}/staffs/${StaffID}`;
     return this.httpClient.get<Staff>(url, this.httpOptions);
   }
@@ -191,8 +202,8 @@ export class DataService {
     const url = `${this.REST_API_SERVER}/services/${payload.id}`;
     return this.httpClient.put<Service>(url, payload, this.httpOptions);
   }
-  public getServiceById(ServiceID: string): Observable<Service> {
-    const url = `${this.REST_API_SERVER}/services/id?id=${ServiceID}`;
+  public getServiceById(ServiceID: string): Observable<any> {
+    const url = `${this.REST_API_SERVER}/services/${ServiceID}`;
     return this.httpClient.get<Service>(url, this.httpOptions);
   }
 
@@ -221,8 +232,8 @@ export class DataService {
   public newBooking(): Booking {
     return this.newbooking;
   }
-  public getAllBooking(): Observable<Booking[]> {
-    const url = `${this.REST_API_SERVER}/booking`;
+  public getAllBooking(): Observable<any> {
+    const url = `${this.REST_API_SERVER}/bookings`;
     return this.httpClient.get<Booking[]>(url);
   }
   public postBooking(payload: Booking): Observable<Booking> {
@@ -243,19 +254,11 @@ export class DataService {
     return this.newdetail;
   }
   public getAllBookingdetail(): Observable<BookingDetail[]> {
-    const url = `${this.REST_API_SERVER}/bookingdetail`;
+    const url = `${this.REST_API_SERVER}/bookingdetails`;
     return this.httpClient.get<BookingDetail[]>(url);
   }
-  public postBookingdetail(payload: BookingDetail): Observable<BookingDetail> {
-    const url = `${this.REST_API_SERVER}/bookingdetail`;
-    return this.httpClient.post<BookingDetail>(url, payload, this.httpOptions);
-  }
-  public putBookingdetail(payload: BookingDetail): Observable<BookingDetail> {
-    const url = `${this.REST_API_SERVER}/bookingdetail`;
-    return this.httpClient.put<BookingDetail>(url, payload, this.httpOptions);
-  }
-  public getBookingdetailById(BookingdetailID: string): Observable<BookingDetail> {
-    const url = `${this.REST_API_SERVER}/Bookingdetail/BookingdetailID?BookingdetailID=${BookingdetailID}`;
+  public getDetailByBookingID(bookingId: string): Observable<any> {
+    const url = `${this.REST_API_SERVER}/bookingdetails/${bookingId}`;
     return this.httpClient.get<BookingDetail>(url, this.httpOptions);
   }
   public decodeToken() {

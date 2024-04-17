@@ -8,6 +8,8 @@ import { TypeServiceComponent } from './type-service/type-service.component';
 import { ServiceComponent } from './service/service.component';
 import { ClientComponent } from './client/client.component';
 import { DataService } from '../service/data.service';
+import { BookingComponent } from './booking/booking.component';
+import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
     {path: 'staff', component: StaffComponent},
     {path: 'dashboard', component: DashboardComponent, canActivate : [authGuard] },
@@ -15,6 +17,8 @@ const routes: Routes = [
     {path: 'typeservice', component: TypeServiceComponent},
     {path: 'service', component: ServiceComponent},
     {path: 'client', component: ClientComponent},
+    {path: 'booking', component: BookingComponent},
+    {path: 'profile', component: ProfileComponent},
 
 ]
 @NgModule({

@@ -21,15 +21,12 @@
             <div class="card-body">
                 <h6 class="text-capitalize">service</h6>
                 <p-table #dt [value]="services" [rows]="10" [paginator]="true"
-                    [globalFilterFields]="['Name','Description','category','Price','createdAt','updatedAt']"
+                    [globalFilterFields]="['Name','Description','Price','createdAt','updatedAt']"
                     [rowHover]="true" dataKey="id">
                     <ng-template pTemplate="header">
                         <tr>
                             <th pSortableColumn="Name">
                                 Tên <p-sortIcon field="Name"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="category">
-                                Loại dịch vụ <p-sortIcon field="category"></p-sortIcon>
                             </th>
                             <th pSortableColumn="Description">
                                 Mô tả <p-sortIcon field="Description"></p-sortIcon>
@@ -54,9 +51,6 @@
                             <td>
                                 {{ service.Name }}
                             </td>
-                            <!-- <td>
-                                {{ service.TypeID }} <br>
-                            </td> -->
                             <td>
                                 {{ service.Description }}
                             </td>
@@ -70,7 +64,7 @@
                                 {{ service.updatedAt | date: "dd/MM/yyyy"}} <br>
                             </td>
                             <td>
-                                {{ service.Delete }}
+                                {{ service.isDelete }}
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"

@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="card-body">
+            <div class="card-body">
+                <p-toolbar styleClass="mb-4 gap-2">
+                    <ng-template pTemplate="right">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Tìm kiếm..." />
+                        </span>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="card-body">
+                <h6 class="text-capitalize">booking</h6>
+                <p-table #dt [value]="bookings" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['FullName','Date','Time','createdAt','updatedAt']"
+                    [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="FullName">
+                                Tên khách hàng<p-sortIcon field="FullName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Date">
+                                Ngày đặt <p-sortIcon field="Date"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="Time">
+                                Khung giờ <p-sortIcon field="Time"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="createdAt">
+                                Ngày tạo <p-sortIcon field="createdAt"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="updatedAt">
+                                Ngày chỉnh <p-sortIcon field="updatedAt"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-booking let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr>
+                            <td>
+                                {{ booking.FullName }}
+                            </td>
+                            <td>
+                                {{ booking.Date | date:'dd/MM/yyyy' }}
+                            </td>
+                            <td>
+                                {{ booking.Time}} <br>
+                            </td>
+                            <td>
+                                {{ booking.createdAt | date: "dd/MM/yyyy" }} <br>
+                            </td>
+                            <td>
+                                {{ booking.updatedAt | date: "dd/MM/yyyy"}} <br>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-success p-button-rounded"
+                                (click)="showDetail(booking._id)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <p-dialog [(visible)]="bookingDialog" [style]="{ width: '600px' }" header="Booking Detail" [modal]="true"
+        styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <label>Mã booking</label> <br>
+                <h5>{{ detail.BookingID }}</h5>
+            </div>
+            <div class="p-field">
+                <label>Tên dịch vụ</label><br>
+                <h5>{{ selectedService }}</h5>
+            </div>
+            <div class="p-field">
+                <label for="price">Tổng tiền</label> <br>
+                <h5>{{ detail.Price}}</h5>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Close" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+        </ng-template>
+    </p-dialog>
+    </div>
+</div>

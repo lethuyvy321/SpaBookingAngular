@@ -1,5 +1,5 @@
 export interface Client{
-    id: string,
+    _id: string,
     FullName: string,
     UserName: string,
     Password:string,
@@ -8,5 +8,5 @@ export interface Client{
     Birthday: Date,
     created : Date,
     updated : Date,
-    isDeleted : boolean,
+    Deleted : boolean,
 }

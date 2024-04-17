@@ -41,6 +41,8 @@ import { RoleComponent } from './role/role.component';
 import { TypeServiceComponent } from './type-service/type-service.component';
 import { ServiceComponent } from './service/service.component';
 import { ClientComponent } from './client/client.component';
+import { BookingComponent } from './booking/booking.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -51,7 +53,9 @@ import { ClientComponent } from './client/client.component';
     RoleComponent,
     TypeServiceComponent,
     ServiceComponent,
-    ClientComponent
+    ClientComponent,
+    BookingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,67 @@
+<p-toast></p-toast>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-capitalize">Profile</h6>
+                    <p-card header="User Information">
+                        <ng-template pTemplate="content">
+                            <div class="p-grid">
+                                <div class="p-col-12">
+                                    <p>FullName: {{ staff.FullName}}</p>
+                                    <p>Username: {{ staff.UserName }}</p>
+                                    <p>Email: {{ staff.Email }}</p>
+                                    <p>CCCD: {{ staff.CCCD }}</p>
+                                    <p>Address: {{ staff.Address }}</p>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-capitalize">Password</h6>
+                    <p-card header="Change Password">
+                        <ng-template pTemplate="content">
+                            <div class="p-grid">
+                                <div class="p-col-12">
+                                    <div class="p-field">
+                                        <label for="old-password">Old Password</label> <br>
+                                        <input type="password" pInputText name="old-password" [(ngModel)]="oldPassword"
+                                            required autofocus />
+                                        <br>
+                                        <small class="p-error" *ngIf="submitted && !oldPassword">Old Password is
+                                            required.</small>
+                                    </div>
+                                    <div class="p-field">
+                                        <label for="new-password">New Password</label> <br>
+                                        <input type="password" pInputText name="new-password" [(ngModel)]="newPassword"
+                                            required autofocus />
+                                        <br>
+                                        <small class="p-error" *ngIf="submitted && !newPassword">New Password is
+                                            required.</small>
+                                    </div>
+                                    <div class="p-field">
+                                        <label for="confirm-password">Confirm Password</label> <br>
+                                        <input type="password" pInputText name="confirm-password" [(ngModel)]="confirmPassword"
+                                            required autofocus />
+                                        <br>
+                                        <small class="p-error" *ngIf="submitted && !confirmPassword">Confirm Password is
+                                            required.</small>
+                                        <button pButton pRipple label="Save" icon="pi pi-check"
+                                        (click)="changePass()"  class="p-button-text"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

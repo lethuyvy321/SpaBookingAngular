@@ -58,7 +58,7 @@ export class StaffComponent {
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        staff.Deleted = true;
+        staff.isDeleted = true;
         this.dataService.putStaff(staff).subscribe({
           next: data => {
             console.log('Xóa thành công', data);
@@ -112,7 +112,7 @@ export class StaffComponent {
     this.submitted = true;
     if (this.isValidData()) {
       console.log("save", this.staff);
-      if (this.staff.id === '') {
+      if (this.staff._id === '') {
         this.staff.RoleID = this.selectedCategory.id;
         this.dataService.postStaff(this.staff).subscribe({
           next: response => {

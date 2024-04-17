@@ -45,6 +45,7 @@ export class TypeServiceComponent {
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        category.isDeleted = true;
         this.dataService.putTypeservice(category).subscribe({
           next: data => {
             console.log('Xóa thành công', data);

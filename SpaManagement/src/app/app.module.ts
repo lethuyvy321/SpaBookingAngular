@@ -46,6 +46,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
     LoginComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

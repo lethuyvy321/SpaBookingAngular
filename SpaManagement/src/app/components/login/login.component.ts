@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
     private dataService: DataService,
     private router: Router,
     private messageService: MessageService,
-    private userStore: UserStoreService,
   ) {}
   public staff: Staff = Object.assign({}, this.dataService.newStaff());
   public submitted = false;
@@ -35,8 +34,6 @@ export class LoginComponent implements OnInit {
           console.log(response.data);
           this.dataService.storeToken(response.data);
           const tokenPayload = this.dataService.decodeToken();
-          this.userStore.setFullNameForStore(tokenPayload.name);
-          this.userStore.setRoleForStore(tokenPayload.role);
           console.log('Đăng nhập thành công', response);
           this.messageService.add({
             severity: 'success',

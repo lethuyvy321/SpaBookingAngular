@@ -70,13 +70,13 @@
                                 {{ service.updatedAt | date: "dd/MM/yyyy"}} <br>
                             </td>
                             <td>
-                                {{ service.Deleted }}
+                                {{ service.isDeleted }}
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
                                     (click)="editStaff(service)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                    (click)="editStaff(service)"></button>
+                                    (click)="deleteStaff(service)"></button>
                             </td>
                         </tr>
                     </ng-template>

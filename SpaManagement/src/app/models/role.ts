@@ -3,5 +3,5 @@ export interface Role{
     Name: string,
     created : Date,
     updated : Date,
-    Deleted : boolean,
+    isDeleted : boolean,
 }

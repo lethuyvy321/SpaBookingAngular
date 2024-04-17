@@ -1,5 +1,5 @@
 export interface Staff{
-    id: string,
+    _id: string,
     FullName: string,
     UserName: string,
     data: string,
@@ -10,5 +10,5 @@ export interface Staff{
     Address: string,
     created : Date,
     updated : Date,
-    Deleted : boolean,
+    isDeleted : boolean,
 }
